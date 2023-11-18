@@ -1,0 +1,6 @@
+[scale]
+name = "std"
+version = "0.0.0"
+
+[dependencies]
+io = {local = true, path = "io"}

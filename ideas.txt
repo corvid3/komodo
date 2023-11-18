@@ -1,0 +1,26 @@
+- server based interpreter
+	- the SDK client can sign in to the interpreter and start debugging
+
+- high speed execution, but still retain enough information
+	to make debugging incredibly easy
+
+- register based interpreter
+	- stack based interpreters are much more difficult to debug while
+		running
+	- SSA translates directly to register based interpreters
+		(track when temp variables are no longer needed, and drop them
+			unless otherwise specified for debugging)
+
+- multi-modal interpreter
+	- release mode (fastest execution, stores no debug data while running)
+	- debug mode (slower execution, but makes debugging possible)
+	one should be able to change the mode at runtime, without having to
+	restart the interpreter
+	- be able to force a function to a specific mode (e.g. @mode debug)
+	- no precompiled bytecode headers, all programs are in source code,
+			(except maybe for release-only apps?)
+	- putting the interpreter into debug mode recompiles the source
+			with -debug, turning off all optimizations, etc
+
+- all data structures are stored in the heap (ease of "updatability",
+	only pointers must be updated if some structure definitions change)

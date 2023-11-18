@@ -1,0 +1,7 @@
+[scale]
+name = "os"
+version = "0.0.0"
+
+# exportable children scales/directories
+[export]
+linux="linux/"

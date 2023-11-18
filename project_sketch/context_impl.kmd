@@ -1,0 +1,20 @@
+import scale::context
+
+@export(scale)
+struct FooContext:
+	foo: int
+
+methods FooContext:
+	defn init() -> Self:
+		let self: Self = {
+			.foo = 2
+		}
+
+		return self
+
+implement context::SomeContext for FooContext:
+	defn get_value(in self) -> int:
+		return self.foo
+
+	defn set_value(out self, in val: int) -> void:
+		self.foo = val

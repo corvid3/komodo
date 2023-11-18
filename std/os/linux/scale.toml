@@ -1,0 +1,6 @@
+[scale]
+name = "linux"
+version = "0.0.0"
+
+[export]
+syscalls="syscalls.kmd"

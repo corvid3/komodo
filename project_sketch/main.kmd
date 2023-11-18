@@ -1,0 +1,22 @@
+import std
+import scale::context::SomeContext
+import scale::context_impl::FooContext
+
+defn fn_with_context() -> void with
+		SomeContext as ctx:
+	let val = ctx.get_value()
+	std.io.stdout().write(std.fmt.format(val))
+	# write 0 to the console
+
+	ctx.set_value(2)
+
+	let val = ctx.get_value()
+	std.io.stdout().write(std.fmt.format(val))
+	# write 2 to the console
+
+defn main() -> void:
+	let ctx = FooContext::init()
+	with ctx as SomeContext:
+		fn_with_context()
+
+#	std.io.stdout().print("Hello, World!")

@@ -1,0 +1,41 @@
+# FooContext.kmd
+trait FooContext<Self>:
+	proc get_foo(in self: Self) -> int
+	proc set_foo(out self: Self, in xyz: int)
+
+# SomeContext.kmd
+struct SomeContext:
+	foo: u64
+
+implement FooContext for SomeContext:
+	defn get_foo(in self) -> int:
+		return self.foo
+	defn set_foo(out self, in xyz: int) -> void:
+		self.foo = xyz
+
+defn some_func(x: T) -> void where
+  context ctx is ContextInterface
+  T: Into<int>:
+	ctx.set_foo(x.into<int>())
+
+defn main() -> void:
+	let ctx = new SomeType: 
+		foo: 0
+	with context = ctx:
+		some_func(2)
+
+
+
+
+
+type expression can be any expression that
+	can be resolved at compile time
+
+std.Into<int>
+
+APPLY_GENERIC
+	GET
+		[std]
+		[Into]
+	{[int]}
+

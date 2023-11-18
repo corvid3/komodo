@@ -1,0 +1,24 @@
+SAFETY & SECURITY
+	writing objectively wrong code in Komodo should be difficult,
+	if not impossible. allowing those developing to do whatever they want,
+	when they want, leads to code written that does not do what is
+	specified in ways that may lead to security and safety concerns.
+	constraints are provided within the language itself to prevent
+	these logical deficits, aswell as other tools provided within the
+	syntax that allow more restrictions if so desired.
+
+	the Tegu engine which the Komodo runtime is based off of has (will have)
+	abilities to limit those who should not have access to running 
+	code by providing measures such as ssh keys, gpg keys, and much more.
+
+STABILITY
+	the Tegu engine which powers Komodo on should never crash due to an internal
+	bug.
+	
+DEBUGGABILITY
+	the Tegu engine allows (will allow) runtime debugging and hot code
+	swapping via a serial connection potentially over the internet.
+	mission critical code that may never be allowed to be shut down
+	for more than a second should be able to be debugged in place, and
+	replaced while running.
+

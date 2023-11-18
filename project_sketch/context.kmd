@@ -1,0 +1,6 @@
+trait SomeContext export(global): 
+	@export(global)
+	defn get_value(in self) -> int
+
+	@export(global)
+	defn set_value(out self, in val: int) -> void

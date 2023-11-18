@@ -1,0 +1,7 @@
+import "COMPFLAGS"
+
+# conditionally re-export another file
+%[cond_reexport(COMPFLAGS.CUR_OS == std.os.OS, "stdout_linux.kmd")]
+
+defn stdout() -> Stdout:
+	return File::Stdout::default()

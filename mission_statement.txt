@@ -1,0 +1,6 @@
+==== komodo ====
+komodo aims to be an extensible
+interpreted language, that works for the
+programmer and not for the computer.
+
+-- TODO --

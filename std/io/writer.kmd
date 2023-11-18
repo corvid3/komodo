@@ -1,0 +1,13 @@
+trait Writer [export]:
+	# returns how many bytes were written
+	defn write(&mut self, in bytes: []const u8) -> usize;	
+
+trait Reader [export]:
+	defn read_u8(&mut self) -> void;
+	defn read_u16(&mut self) -> void;
+	defn read_u32(&mut self) -> void;
+	defn read_u64(&mut self) -> void;
+
+	# expects "bytes" to be pre-allocated
+	# returns how many bytes were read
+	defn read_buf(&mut self, out bytes: []u8) -> usize;

@@ -1,0 +1,35 @@
+
+===============================
+
+-- interface.lzt
+
+interface ToInt:
+	proc to(&self) -> int
+
+================================
+
+-- foo.lzt
+
+let std = import 'std';
+let interface = import 'interface.lzt'
+
+a: int
+
+pub new(self, x: int) -> Self:
+	self.a = std.math.pow(x, x)
+	return self
+
+implement interface.ToInt for Self:
+	proc to(&self) -> int:
+		return self.a
+
+===================================
+
+-- main.lst
+
+let std = import 'std';
+let foo = import 'foo.lst';
+
+pub proc main():
+	let mut bar = new foo(3);
+	std.print(bar.to())

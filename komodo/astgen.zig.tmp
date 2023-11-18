@@ -1,0 +1,58 @@
+// README
+// i'm not sure whether i want to implement AST -> TST currently,
+// so the entire TST pipeline has been put into tmp status
+//
+// eventually, TST might get reimplemented if required, and 
+// the entire pipeline will have to be rewritten. shucks!
+
+
+
+// astgen.zig
+// converts the AST into the TST
+// TST is a reduced version of the AST
+// TST is then passed through sema.zig to create graphIr
+
+const std = @import("std");
+const Ast = @import("ast/Ast.zig");
+const AstNode = @import("ast/Node.Zig");
+const Tst = @import("tst/Tst.zig");
+const TstNode = @import("tst/Node.zig");
+const diagnostics = @import("diagnostics.zig");
+
+const Self = @This();
+
+const Error = error{};
+
+alloc: std.mem.Allocator,
+ast_node_tags: []const AstNode.Tag,
+ast_node_datas: []const AstNode.Data,
+ast_node_extras: []const AstNode.ExtraData,
+nodes: std.MultiArrayList(TstNode) = .{},
+
+pub fn gen(
+    alloc: std.mem.Allocator,
+    ast: Ast,
+    // diags: *diagnostics.Diagnostics,
+) Error!Tst {
+    var self = Self{
+        .alloc = alloc,
+        .ast_node_tags = ast.nodes.items(.tag),
+        .ast_node_datas = ast.nodes.items(.data),
+        .ast_node_extras = ast.extra_data.items,
+    };
+
+    self.inner_gen();
+}
+
+fn push_node(self: *Self, node: TstNode) usize {
+    _ = node;
+    _ = self;
+}
+
+fn gen_proc(self: *Self) void {
+    _ = self;
+}
+
+fn inner_gen(self: *Self) void {
+    _ = self;
+}

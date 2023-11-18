@@ -1,0 +1,14 @@
+due to the security restrictions imposed in the mission statement,
+all compiled code should be static.
+external code (e.g. written in C/zig/C++/rust etc) should be static as well.
+
+thusly, both the tegu bytecode of the proper executable and any
+native code that is called from tegu must be bundled together.
+
+all of the files required are bundled together into a .tar.gz, which is 
+decompressed at runtime into a secure location on the filesystem
+	(e.g. /tmp/xyz with a user or mod restriction),
+and then all files are loaded into the tegu runtime and ran.
+
+note, that as the external native code must be supplied in seperate files,
+the external code must be provided as a dynamic object rather than a static object.

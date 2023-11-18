@@ -1,0 +1,69 @@
+<factor>     ::= ident (.factor)?+
+
+<insta_expr>  ::= [ref] factor
+<param_expr>  ::= [write|read|readwrite] factor 
+
+
+=========
+
+type system?
+
+we have a garbage collector, so we don't need to worry about
+	handing around direct  pointers or anything
+NO null pointers. ever. disallow null pointers. that can't happen.
+in/inout/out ref types, act like self-documenting code
+copy/clone like rust, but with very different meanings
+copy takes a value and makes a reference to it
+	e.g. copy "test" -> ref String 
+clone takes a value, and constructs an entirely new value from it
+	e.g. clone "test" -> String
+
+copy and clone are inherently defined for every type,
+	as all primitive types implement a copy/clone, except for those
+	which copy and or clone is explicitly disallowed
+
+primitive VM values:
+	u/i 1byte int
+	u/i 2byte int
+	u/i 4byte int
+	u/i 8byte int
+	4byte floating 
+	8byte floating
+	slice [u8ptr | u8len]
+		with associated instructions:
+			set_len: x
+
+primitive language values:
+	array<T>:
+		slice<T> | len of slice is capacity
+		len
+
+	string: (TODO: utf-8 compatable)
+		array<integer>
+		associated procedures
+
+copy/clone deletion:
+	static TcpConnection [nocopy, noclone]:
+		posix_fd: comptime if(std.os.tag == .Linux): u8 else: panic!()
+		
+
+-- variadic argument procedures
+proc print(fmt: str, ++) [extern]
+
+struct String:
+	array: []u8
+
+
+-- self documenting code with in/inout/out ref
+
+struct Mutator[T] where
+  T: Add:
+	val: out ref T
+
+	cons(in: out ref T):
+		return Self {
+			.val = in
+		}
+
+	proc mutate(ref self):
+		self.val += 1

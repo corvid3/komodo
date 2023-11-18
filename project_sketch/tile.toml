@@ -1,0 +1,6 @@
+[tile]
+name = "test project"
+
+[dependencies]
+std = "*"
+
