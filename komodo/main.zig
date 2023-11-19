@@ -1,8 +1,8 @@
 const std = @import("std");
-const Tile = @import("Tile.zig");
 const Scale = @import("Scale.zig");
 const Source = @import("Source.zig");
 const Diagnostics = @import("diagnostics.zig").Diagnostics;
+const clap = @import("clap");
 
 const test_program =
     \\proc main( xyz : usize ):
@@ -13,61 +13,47 @@ const test_program =
     \\        set x = 4
 ;
 
-const Arguments = struct {
-    arguments: std.process.ArgIterator,
-    root_filename: []const u8,
-
-    pub fn init(alloc: std.mem.Allocator) Arguments {
-        var args = std.process.argsWithAllocator(alloc) catch
-            std.debug.panic("mem err arguments\n", .{});
-
-        var root_filename: ?[]const u8 = null;
-
-        while (args.next()) |opt| {
-            if (std.mem.eql(u8, opt, "-file")) {
-                const filename = args.next() orelse {
-                    std.log.err(
-                        "expected filename after -file opt\n",
-                        .{},
-                    );
-                    std.process.exit(1);
-                };
-
-                root_filename = filename;
-            }
-        }
-
-        if (root_filename == null) {
-            std.log.err(
-                "expected a filename to be given\n",
-                .{},
-            );
-
-            std.process.exit(1);
-        }
-
-        return @This(){
-            .arguments = args,
-            .root_filename = root_filename.?,
-        };
-    }
-
-    pub fn deinit(self: *Arguments) void {
-        self.arguments.deinit();
-    }
-};
-
 // const UnitContext = struct {
 //     source: []const u8,
 //     tokens: std.MultiArrayList(Token),
 // };
 
 pub fn main() !void {
-    var alloc = std.heap.page_allocator;
+    const stdout = std.io.getStdOut().writer();
 
-    var args = Arguments.init(alloc);
-    defer args.deinit();
+    const params = comptime clap.parseParamsComptime(
+        \\ -h, --help          Display help and exit.
+        \\ -r, --root <str>    Path to which tile root to compile.
+        \\
+    );
 
-    var manager = Scale.init();
-    _ = manager;
+    var diag = clap.Diagnostic{};
+    var res = clap.parse(clap.Help, &params, clap.parsers.default, .{
+        .diagnostic = &diag,
+    }) catch |err| {
+        diag.report(std.io.getStdErr().writer(), err) catch
+            std.debug.panic("", .{});
+        return err;
+    };
+
+    defer res.deinit();
+
+    if (res.args.help != 0) {
+        try clap.usage(stdout, clap.Help, &params);
+        try stdout.writeAll("\n");
+        try clap.help(stdout, clap.Help, &params, .{});
+        return;
+    }
+
+    if (res.args.root == null) {
+        try std.io.getStdErr().writer().print(
+            "ERROR: expected a root tile directory to be provided\n",
+            .{},
+        );
+
+        return;
+    }
+
+    const root_dir = res.args.root.?;
+    std.debug.print("root_dir: {s}\n", .{root_dir});
 }

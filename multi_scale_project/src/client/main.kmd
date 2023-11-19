@@ -1,0 +1,4 @@
+using pkg::shared
+
+defn main():
+	shared::some_func(1)

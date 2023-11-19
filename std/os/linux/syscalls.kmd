@@ -1,2 +1,5 @@
-defn write(in fd: uint, in bytes: []const u8) [export, extern] -> uint;
-defn read(in fd: uint, out bytes: []u8) [export, extern] -> uint;
+export
+defn write(in fd: uint, in bytes: []const u8) -> uint extern(__kmd_os_write);
+
+export
+defn read(in fd: uint, out bytes: []u8) -> uint extern(__kmd_os_write);

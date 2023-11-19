@@ -11,33 +11,6 @@ following this section will be a multitude of subsections
 describing concepts used within the komodo compiler.
 we will work top-down in concepts.
 
-==== TILE     ====
-each runnable program compiled by the komodo compiler
-is nicknamed a "tile", short for "reptile". 
-
-a tile is made up of a tile.toml config file,
-which contains information about how the file should be compiled
-and a singular "main" scale which makes up the entire source tree besides
-the external dependencies.
-
-when compiled, a tile is converted into an tegu-executable .tar file,
-which may be optionally compressed by an external algorithm.
-this .tar file contains all of the necessary executable code to be ran by
-the tegu virtual machine backend. more information on this can be found
-in the tegu virtual machine design document.
-
-==== SCALE    ====
-
-composed of one or more files, zero or more other scales as dependencies,
-and a config file, a scale is the base unit of source code within a komodo project.
-
-an example of a scale is the standard library, which is itself a scale
-composed up of many different scales, each performing a specific duty
-
-scales themselves are not compiled into separate library files,
-instead they are compiled directly into the resulting source executable.
-in this way, all komodo executables are "static", as required by tegu. 
-
 ==== LEXER    ====
 
 komodo works on a hand-written lexer, for speed

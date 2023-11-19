@@ -1,3 +1,7 @@
+# mark context.kmd & context_impl.kmd as scales of this package
+scale context
+scale context_impl
+
 import std
 import scale::context::SomeContext
 import scale::context_impl::FooContext

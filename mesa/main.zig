@@ -1,7 +1,11 @@
 const std = @import("std");
-const vm = @import("vm.zig");
 const clap = @import("clap");
-const loader = @import("loader.zig");
+
+/// initialize the cwd as a komodo project
+fn init() !void {
+    const cwd = std.fs.cwd();
+    cwd.access("mesa.toml", .{});
+}
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
@@ -13,8 +17,8 @@ pub fn main() !void {
     const stdout = std.io.getStdOut().writer();
 
     const params = comptime clap.parseParamsComptime(
-        \\ -h, --help          Display help and exit.
-        \\ -i, --input <str>   Which executable to execute.
+        \\ -h, --help  Display help and exit.
+        \\ --init      Initialize a project within the current directory.
         \\
     );
 
@@ -34,8 +38,4 @@ pub fn main() !void {
         try stdout.writeAll("\n");
         try clap.help(stdout, clap.Help, &params, .{});
     }
-}
-
-test {
-    _ = loader;
 }

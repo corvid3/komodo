@@ -1,0 +1,2 @@
+defn some_func(in smn: int) -> int export:
+	# ... do some stuff

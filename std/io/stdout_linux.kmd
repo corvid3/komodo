@@ -1,9 +1,10 @@
 # make sure to mark the struct as exportable and
-struct Stdout [export, global]:
+@export(global)
+struct Stdout:
 	filedes: usize
 
 impl Write for Stdout:
-	defn write(&self, in slice: []const u8) [export] -> usize:
+	defn write(&self, in slice: []const u8) -> usize:
 		std.os.linux.syscalls.write(self.filedes, slice)
 
 impl New for Stdout:

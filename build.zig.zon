@@ -6,6 +6,11 @@
 		.toml = .{
 			.url = "https://github.com/sam701/zig-toml/archive/6d19db1ba22ef0714d697f487f78f64ec5b1fe2b.tar.gz",
 			.hash = "12204a4bda9741739bdf3794b054bc475df4dc11f6a5a48dc30abbf35a0450926b7f",
-		}
+		},
+
+		.clap = .{
+			.url = "https://github.com/Hejsil/zig-clap/archive/c394594d218c3c936547e590b461e69e6e0b20c4.tar.gz",
+			.hash = "122066d86920926a4a674adaaa10f158dc4961c2a47e588e605765455d74ca72c2ad",
+		},
 	},
 }

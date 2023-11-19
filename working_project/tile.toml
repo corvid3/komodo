@@ -1,0 +1,10 @@
+[tile]
+
+# name of this tile (used by the TBD package manager)
+name = "working_project"
+
+# version of this tile (used by the TBD package manager)
+version = "0.0.0"
+
+# the root source scale
+main = "src/"
