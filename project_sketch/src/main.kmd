@@ -1,6 +1,6 @@
-# mark context.kmd & context_impl.kmd as scales of this package
-scale context
-scale context_impl
+# mark context.kmd & context_impl.kmd as modules of this scale
+mod context
+mod context_impl
 
 import std
 import scale::context::SomeContext

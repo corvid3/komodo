@@ -1,0 +1,4 @@
+import std
+
+defn main():
+	std.print("Hello, World!")

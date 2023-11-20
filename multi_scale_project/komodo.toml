@@ -1,9 +1,0 @@
-[package]
-name = "multi binary package"
-version = "0.0.1"
-
-# the binaries that we want to export (install)
-bins = {
-  src = "src/server/main.kmd",
-  src = "src/client/main.kmd",
-}
