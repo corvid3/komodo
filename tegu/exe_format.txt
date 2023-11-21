@@ -1,0 +1,42 @@
+KEY:
+u8    - 1 byte int
+u16   - 2 byte int
+u32   - 4 byte int
+usize - word size int
+
+[x]n      - x number of type n
+y = x     - store a value to be used later, usually for a variable sized list
+
+EXE FILE:
+{
+	HEADER:
+		[4]u8 - DE AD BE EF
+
+	CONSTANTS:
+		nc = u32  - number of constants
+		[nc]VALUE - variable sized list of values
+
+	FUNCTION MANIFEST:
+		nf = u16 - number of functions
+		[nf]
+}
+
+CONSTANT VALUE TAG:
+{
+	Integer  - an integer
+	Floating - a floating point number
+	Fragment - a fragment of executable code
+}
+
+CONSTANT VALUE STRUCT:
+{
+	
+}
+
+FUNCTION STRUCT:
+{
+	np = u8  - number of arguments expected by this function
+	ln = u32 - length of the executable code block
+
+	[np] {}
+}

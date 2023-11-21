@@ -18,11 +18,32 @@ pub const Bytes = enum(u8) {
     MULI = 0x22,
     DIVI = 0x23,
 
+    // floating point operations
     ADDF = 0x30,
     SUBF = 0x31,
     MULF = 0x32,
     DIVF = 0x33,
 
-    /// immediately suspend the virtual machine
-    HALT = 0xFF,
+    /// create a new object
+    /// u16 | index to a class specifier into the const pool
+    NEW = 0xA0,
+
+    pub fn to_string(self: @This()) []const u8 {
+        switch (self) {
+            .NOP => "nop",
+            .LOADREG_CONST => "loadreg_const",
+
+            .ADDI => "addi",
+            .SUBI => "subi",
+            .MULI => "muli",
+            .DIVI => "divi",
+
+            .ADDF => "addf",
+            .SUBF => "subf",
+            .MULF => "mulf",
+            .DIVF => "divf",
+
+            .NEW => "new",
+        }
+    }
 };
